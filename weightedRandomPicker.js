@@ -9,7 +9,7 @@ function WeightedRandomPicker (initialWeightedValues) {
     var times = options.times || 1;
     var picks = [];
 
-    if (uniq && times > this.keys().length) {
+    if (uniq && times > this.getKeys().length) {
       throw new InvalidUniqTimesException();
     } else {
       for (var i=0; i<times; i++){
@@ -20,12 +20,12 @@ function WeightedRandomPicker (initialWeightedValues) {
     return options.times > 1 ? picks : picks[0];
   };
 
-  this.keys = function(){
+  this.getKeys = function(){
     return Object.keys(this.weightedValues);
   };
 
-  this.values = function(){
-    var values = this.keys().map(function(key) {
+  this.getValues = function(){
+    var values = this.getKeys().map(function(key) {
       return this.weightedValues[key];
     }.bind(this));
     return values;
@@ -38,7 +38,7 @@ function WeightedRandomPicker (initialWeightedValues) {
   };
 
   var _getSumOfWeights = function(){
-    var sumOfWeights = this.values().reduce(function(a,b){
+    var sumOfWeights = this.getValues().reduce(function(a,b){
         return a + b;
       });
     return sumOfWeights;
@@ -53,7 +53,7 @@ function WeightedRandomPicker (initialWeightedValues) {
   var _randomPick = function(uniq){
     var random = _getRandom.call(this);
     var pick;
-    this.keys().forEach(function(key, index){
+    this.getKeys().forEach(function(key, index){
       var weight = this.weightedValues[key];
       if (weight >= random) {
         pick = pick || key; //only store the first pick
