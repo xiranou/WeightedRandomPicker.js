@@ -1,4 +1,4 @@
-# weightedRandomPicker.js
+# WeightedRandomPicker.js
     //parameter: {stuffToPick: weight}
     var weightedValues = {"A": 0.1, "B": 0.7, "C": 0.7};
 
