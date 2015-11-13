@@ -9,8 +9,12 @@ function WeightedRandomPicker (initialWeightedValues) {
     var times = options.times || 1;
     var picks = [];
 
-    for (var i=0; i<times; i++){
-      picks.push(_randomPick.call(this, uniq));
+    if (uniq && times > this.keys().length) {
+      throw new InvalidUniqTimesException();
+    } else {
+      for (var i=0; i<times; i++){
+        picks.push(_randomPick.call(this, uniq));
+      }
     }
 
     return options.times > 1 ? picks : picks[0];
@@ -25,6 +29,12 @@ function WeightedRandomPicker (initialWeightedValues) {
       return this.weightedValues[key];
     }.bind(this));
     return values;
+  };
+
+  var InvalidUniqTimesException = function(){
+    this.toString = function(){
+      return "While uniq is set to true, times option cannot be more than what the actual number of key/values in object. Please confirm.";
+    };
   };
 
   var _getSumOfWeights = function(){
@@ -60,13 +70,3 @@ function WeightedRandomPicker (initialWeightedValues) {
     return pick;
   };
 }
-
-var weightedValues = {"A": 0.1, "B": 0.7, "C": 0.7, "D": 0.8};
-
-var picker = new WeightedRandomPicker(weightedValues);
-
-var picks = picker.randomPick({times: 3});
-console.log(picks);
-
-var uniqPicks = picker.randomPick({times: 3, uniq: true});
-console.log(uniqPicks);
