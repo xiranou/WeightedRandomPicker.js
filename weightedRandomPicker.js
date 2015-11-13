@@ -4,9 +4,7 @@ function weightedRandomPicker (initialWeightedValues) {
   this.weightedValues = initialWeightedValues;
 
   this.randomPick = function(){
-    var sumOfWeights = _getSumOfWeights.call(this);
-    var random = _getRandom.call(this, sumOfWeights);
-    return _randomPick.call(this, random);
+    return _randomPick.call(this);
   };
 
   this.keys = function(){
@@ -29,10 +27,12 @@ function weightedRandomPicker (initialWeightedValues) {
 
   var _getRandom = function(max, min){
     var min = min || 0;
+    var max = max || _getSumOfWeights.call(this);
     return Math.random() * max;
   };
 
-  var _randomPick = function(random){
+  var _randomPick = function(){
+    var random = _getRandom.call(this);
     var pick;
     this.keys().forEach(function(key, index){
       var weight = this.weightedValues[key];
