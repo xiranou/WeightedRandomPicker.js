@@ -1,7 +1,6 @@
-function WeightedRandomPicker (initialWeightedValues) {
+function WeightedRandomPicker (weightedValues) {
 
-  var initialWeightedValues = initialWeightedValues || {};
-  this.weightedValues = initialWeightedValues;
+  this.weightedValues = weightedValues || {};
 
   this.randomPick = function(options){
     var options = options || {};
