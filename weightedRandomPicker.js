@@ -3,8 +3,14 @@ function weightedRandomPicker (initialWeightedValues) {
   var initialWeightedValues = initialWeightedValues || {};
   this.weightedValues = initialWeightedValues;
 
-  this.randomPick = function(){
-    return _randomPick.call(this);
+  this.randomPick = function(options){
+    var options = options || {};
+    var times = options.times || 1;
+    var picks = [];
+    for (var i=0; i<times; i++){
+      picks.push(_randomPick.call(this));
+    }
+    return options.times > 1 ? picks : picks[0];
   };
 
   this.keys = function(){
