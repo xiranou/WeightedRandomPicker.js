@@ -5,7 +5,7 @@
     //init
     var picker = new WeightedRandomPicker(weightedValues);
 
-    //default number of pick is 1
+    //default number of pick is 1, will return one randomly picked key from param object
     var pick = picker.randomPick();
 
     //will return 10 picks in an Array
