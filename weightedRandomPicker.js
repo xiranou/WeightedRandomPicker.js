@@ -1,6 +1,10 @@
-function WeightedRandomPicker (weightedValues) {
+function WeightedRandomPicker (initialWeightedValues) {
 
-  this.weightedValues = weightedValues || {};
+  //clones the initialWeightedValues:
+  //set default to empty object for the JSON lib clone trick to work
+  var weightedValues = initialWeightedValues || {};
+  // clones param object to property of this
+  this.weightedValues = JSON.parse(JSON.stringify(weightedValues));
 
   this.randomPick = function(options){
     var options = options || {};
