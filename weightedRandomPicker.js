@@ -1,4 +1,4 @@
-function weightedRandomPicker (initialWeightedValues) {
+function WeightedRandomPicker (initialWeightedValues) {
 
   var initialWeightedValues = initialWeightedValues || {};
   this.weightedValues = initialWeightedValues;
