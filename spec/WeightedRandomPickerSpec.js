@@ -32,4 +32,10 @@ describe('Pick randomly by given weight', function() {
     var uniqPicks = picker.randomPick({times: 3, uniq: true});
     expect((new Set(uniqPicks)).size).toEqual(3);
   });
+  it('should pick low weighted items if all items has low/euqal weights', function() {
+    var weightedValues = {"A": 0.1, "B": 0.1, "C": 0.1, "D": 0.1};
+    var picker = new WeightedRandomPicker(weightedValues);
+    var pick = picker.randomPick();
+    expect(Object.keys(weightedValues)).toContain(pick);
+  });
 });
