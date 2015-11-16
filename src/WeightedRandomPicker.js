@@ -2,21 +2,26 @@ function WeightedRandomPicker (initialWeightedValues) {
 
   //clones the initialWeightedValues:
   //set default to empty object for the JSON lib clone trick to work
-  var weightedValues = initialWeightedValues || {};
+  var initialWeightedValues = initialWeightedValues || {};
   // clones param object to property of this
-  this.weightedValues = JSON.parse(JSON.stringify(weightedValues));
+  this.weightedValues = JSON.parse(JSON.stringify(initialWeightedValues));
 
   this.randomPick = function(options){
-    var options = options || {};
-    var uniq = options.uniq || false;
-    var times = options.times || 1;
     var picks = [];
+    var options = options || {};
+    options.uniq = options.uniq || false;
+    options.times = options.times || 1;
 
-    if (uniq && times > this.getKeys().length) {
+    if (options.uniq && options.times > this.getKeys().length) {
       throw new InvalidUniqTimesException();
     } else {
-      for (var i=0; i<times; i++){
-        picks.push(_randomPick.call(this, uniq));
+      for (var i=0; i<options.times; i++){
+        picks.push(_randomPick.call(this, options.uniq));
+      }
+      if (options.uniq) {
+        // uniq picks deletes from this.weightedValues
+        // re-clone from initial after uniq pick completes
+        this.weightedValues = JSON.parse(JSON.stringify(initialWeightedValues));
       }
     }
 
