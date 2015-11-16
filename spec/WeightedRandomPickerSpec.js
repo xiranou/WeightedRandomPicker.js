@@ -38,4 +38,9 @@ describe('Pick randomly by given weight', function() {
     var pick = picker.randomPick();
     expect(Object.keys(weightedValues)).toContain(pick);
   });
+  it('should be able to pick and with options without initiation', function() {
+    var weightedValues = {"A": 0.5, "B": 0.1, "C": 0.7, "D": 0.7};
+    var picks = WeightedRandomPicker.pickFrom(weightedValues, {times: 2, uniq: true});
+    expect((new Set(picks)).size).toEqual(2);
+  });
 });
