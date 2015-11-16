@@ -35,10 +35,10 @@ describe('Pick randomly by given weight', function() {
   it('should be able to uniq picks multiple times', function() {
     var weightedValues = {"A": 0.8, "B": 0.1, "C": 0.5, "D": 0.3};
     var picker = new WeightedRandomPicker(weightedValues);
-    var firstPicks = picker.randomPick({times: 4, uniq: true});
-    expect((new Set(firstPicks)).size).toEqual(4);
-    var secondPicks = picker.randomPick({times: 4, uniq: true});
-    expect((new Set(secondPicks)).size).toEqual(4);
+    picker.randomPick({times: 4, uniq: true});
+    picker.randomPick({times: 4, uniq: true});
+    var picks = picker.randomPick({times: 4, uniq: true});
+    expect((new Set(picks)).size).toEqual(4);
   });
   it('should pick low weighted items if all items has low/euqal weights', function() {
     var weightedValues = {"A": 0.1, "B": 0.1, "C": 0.1, "D": 0.1};
