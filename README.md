@@ -2,7 +2,11 @@
     //parameter: {stuffToPick: weight}
     var weightedValues = {"A": 0.1, "B": 0.7, "C": 0.7};
 
-    //init
+    //without init
+    //pickFrom accepts weightedValue and options
+    var result = WeightedRandomPicker.pickFrom(weightedValues, {times: 2, uniq: true});
+
+    //with init
     var picker = new WeightedRandomPicker(weightedValues);
 
     //default number of pick is 1, will return one randomly picked key from param object
