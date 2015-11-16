@@ -73,3 +73,8 @@ function WeightedRandomPicker (initialWeightedValues) {
     return pick;
   };
 }
+
+WeightedRandomPicker.pickFrom = function(weightedValues, options){
+  var options = options || {};
+  return (new WeightedRandomPicker(weightedValues)).randomPick(options);
+};
