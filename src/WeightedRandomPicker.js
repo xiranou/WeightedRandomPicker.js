@@ -16,7 +16,7 @@ function WeightedRandomPicker (initialWeightedValues) {
       throw new InvalidUniqTimesException();
     } else {
       for (var i=0; i<options.times; i++){
-        picks.push(_randomPick.call(this, options.uniq));
+        picks.push(_randomPick.call(this, options));
       }
       if (options.uniq) {
         // uniq picks deletes from this.weightedValues
@@ -58,14 +58,14 @@ function WeightedRandomPicker (initialWeightedValues) {
     return Math.random() * max;
   };
 
-  var _randomPick = function(uniq){
+  var _randomPick = function(options){
     var random = _getRandom.call(this);
     var pick;
     this.getKeys().forEach(function(key, index){
       var weight = this.weightedValues[key];
       if (weight >= random) {
         pick = pick || key; //only store the first pick
-        if (uniq && this.weightedValues[pick]) {
+        if (options.uniq && this.weightedValues[pick]) {
           // delete from pick not from key since
           // it is not breaking out from forEach
           // also checks if the pick exists in
