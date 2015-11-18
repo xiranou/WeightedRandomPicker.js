@@ -18,5 +18,5 @@
     //will return 3 unique picks
     var uniqPicks = picker.randomPick({times: 3, uniq: true});
 
-    //will throw error, unique picks cannot have times more than its own keys
+    //will throw error, unique picks cannot have times more than its number of keys
     var invalidPicks = picker.randomPick({times: 4, uniq: true});
