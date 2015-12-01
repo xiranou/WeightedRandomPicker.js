@@ -80,6 +80,5 @@ function WeightedRandomPicker (initialWeightedValues) {
 }
 
 WeightedRandomPicker.pickFrom = function(weightedValues, options){
-  var options = options || {};
   return (new WeightedRandomPicker(weightedValues)).randomPick(options);
 };
