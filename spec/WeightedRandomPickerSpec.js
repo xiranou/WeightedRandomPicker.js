@@ -17,7 +17,7 @@ describe('Can initiate', function() {
 
 describe('Pick randomly by given weight', function() {
   it('should pick with only one weight', function() {
-    expect(WeightedRandomPicker.pickFrom({"A": 0.2}, {times: 1, uniq: true})).toEqual("A");
+    expect(WeightedRandomPicker.pickFrom({"A": 0.2}, {times: 1, uniq: true})).toEqual(["A"]);
   });
   it('should pick by the given times', function() {
     var weightedValues = {"A": 0.2, "B": 0.1, "C": 0.5};
@@ -47,7 +47,7 @@ describe('Pick randomly by given weight', function() {
     var weightedValues = {"A": 0.1, "B": 0.1, "C": 0.1, "D": 0.1};
     var picker = new WeightedRandomPicker(weightedValues);
     var pick = picker.randomPick();
-    expect(Object.keys(weightedValues)).toContain(pick);
+    expect(Object.keys(weightedValues)).toContain(pick[0]);
   });
   it('should be able to pick and with options without initiation', function() {
     var weightedValues = {"A": 0.5, "B": 0.1, "C": 0.7, "D": 0.7};

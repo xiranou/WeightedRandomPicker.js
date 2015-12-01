@@ -25,7 +25,7 @@ function WeightedRandomPicker (initialWeightedValues) {
       }
     }
 
-    return options.times > 1 ? picks : picks[0];
+    return picks;
   };
 
   this.getKeys = function(){
