@@ -2,13 +2,13 @@ function WeightedRandomPicker (initialWeightedValues) {
 
   //clones the initialWeightedValues:
   //set default to empty object for the JSON lib clone trick to work
-  var initialWeightedValues = initialWeightedValues || {};
+  initialWeightedValues = initialWeightedValues || {};
   // clones param object to property of this
   this.weightedValues = JSON.parse(JSON.stringify(initialWeightedValues));
 
   this.randomPick = function(options){
     var picks = [];
-    var options = options || {};
+    options = options || {};
     options.uniq = options.uniq || false;
     options.times = options.times || 1;
 
@@ -16,7 +16,7 @@ function WeightedRandomPicker (initialWeightedValues) {
       throw new InvalidUniqTimesException();
     } else {
       for (var i=0; i<options.times; i++){
-        picks.push(_randomPick.call(this, options));
+        picks.push(randomPick.call(this, options));
       }
       if (options.uniq) {
         // uniq picks deletes from this.weightedValues
@@ -45,21 +45,21 @@ function WeightedRandomPicker (initialWeightedValues) {
     };
   };
 
-  var _getSumOfWeights = function(){
+  var getSumOfWeights = function(){
     var sumOfWeights = this.getValues().reduce(function(a,b){
         return a + b;
       });
     return sumOfWeights;
   };
 
-  var _getRandom = function(max, min){
+  var getRandom = function(max, min){
     var min = min || 0;
-    var max = max || _getSumOfWeights.call(this);
+    var max = max || getSumOfWeights.call(this);
     return Math.random() * max;
   };
 
-  var _randomPick = function(options){
-    var random = _getRandom.call(this);
+  var randomPick = function(options){
+    var random = getRandom.call(this);
     var pick;
     this.getKeys().forEach(function(key, index){
       var weight = this.weightedValues[key];
