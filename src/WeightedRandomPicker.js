@@ -1,5 +1,4 @@
 function WeightedRandomPicker (initialWeightedValues) {
-
   //clones the initialWeightedValues:
   //set default to empty object for the JSON lib clone trick to work
   initialWeightedValues = initialWeightedValues || {};
@@ -53,8 +52,8 @@ function WeightedRandomPicker (initialWeightedValues) {
   };
 
   var getRandom = function(max, min){
-    var min = min || 0;
-    var max = max || getSumOfWeights.call(this);
+    min = min || 0;
+    max = max || getSumOfWeights.call(this);
     return Math.random() * max;
   };
 
